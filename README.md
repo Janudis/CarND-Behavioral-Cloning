@@ -18,6 +18,14 @@ The goals / steps of this project are the following:
 * Use the model to drive the vehicle autonomously around the first track in the simulator. The vehicle should remain on the road for an entire loop around the track.
 * Summarize the results with a written report
 
+### Files Submitted 
+My project includes the following files:
+
+- **model.py** : Containing the script to create and train the model
+- **drive.py** : For driving the car in autonomous mode in the simulator (This is provided [Udacity](https://github.com/udacity/CarND-Behavioral-Cloning-P3/blob/master/drive.py), my only modification was to increase the car speed on line 47 from 9 to 15)
+- **model.h5** : Containing a trained convolution neural network.
+- **writeup_report.md** : Summarizing the results
+
 ## Details About Files In This Directory
 
 ### `drive.py`

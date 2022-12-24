@@ -38,7 +38,7 @@ model.save(filepath)
 Once the model has been saved, it can be used with drive.py using this command:
 
 ```sh
-python drive.py model.h5
+python drive.py model_10eps.h5
 ```
 
 The above command will load the trained model and use the model to make predictions on individual images in real-time and send the predicted angle back to the server via a websocket connection.

@@ -4,17 +4,15 @@
 # Project 3 - Term 1, Self-Driving Car Nanodegree Program by Udacity
 
 import numpy as np
-import csv
 import cv2
+from keras.applications.vgg16 import VGG16
 from keras.models import Model
 import matplotlib.pyplot as plt
-from keras.models import Sequential
-from keras.layers import Cropping2D
-from keras.layers import Flatten, Dense, Lambda, Dropout
-from keras.layers.convolutional import Convolution2D
-from keras.layers.pooling import MaxPooling2D
+from keras.layers import Cropping2D, Flatten, Dense, Lambda, Dropout
 from keras import __version__ as keras_version
+
 print(keras_version)
+
 # Load images and streering data
 # The data set in this project is provided by Udacity, collected from Self-Driving Car simulator
 
@@ -52,28 +50,22 @@ for image, measurement in zip(images, measurements):
 X_train = np.array(augmented_images)
 y_train = np.array(augmented_measurements)
 
-# Building End-to-end Learning Model for Self-Driving Cars
-# The model architecture is based on NVIDIA's paper: https://arxiv.org/abs/1604.07316
-
-model = Sequential()
+# Load the VGG16 model, pre-trained on ImageNet
+model = VGG16(weights='imagenet', include_top=True)
 
 # Preprocessing the data
 model.add(Lambda(lambda x: x / 255.0 - 0.5, input_shape=(160, 320, 3)))  # Normalizing data + Mean centered data
 model.add(Cropping2D(cropping=((70, 20), (0, 0))))  # Cropping image in Keras
 
-model.add(Convolution2D(24, (5, 5), strides=(2, 2), activation='relu'))
-model.add(Convolution2D(36, (5, 5), strides=(2, 2), activation='relu'))
-model.add(Convolution2D(48, (5, 5), strides=(2, 2), activation='relu'))
-model.add(Convolution2D(64, (3, 3), activation='relu'))
-model.add(Convolution2D(64, (3, 3), activation='relu'))
-model.add(Flatten())
-model.add(Dense(100))
-model.add(Dense(10))
+# Remove the output layers of the VGG16 model
+model.layers.pop()
+model.layers.pop()
+model.layers.pop()
+
+# Add a new output layer for regression
 model.add(Dense(1))
 
 model.compile(loss='mse', optimizer='adam')
-# model.fit(X_train, y_train, validation_split=0.2, shuffle=True, epochs=10)
-#model.save('model_10eps.h5')
 
 history_object = model.fit(X_train, y_train, validation_split=0.2, shuffle=True, epochs=2)
 model.save('model_10eps.h5')

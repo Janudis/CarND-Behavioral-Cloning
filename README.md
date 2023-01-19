@@ -22,7 +22,7 @@ The goals / steps of this project are the following:
 My project includes the following files:
 
 - **model.py** : Containing the script to create and train the model
-- **drive.py** : For driving the car in autonomous mode in the simulator (This is provided [Udacity](https://github.com/udacity/CarND-Behavioral-Cloning-P3/blob/master/drive.py), my only modification was to increase the car speed on line 47 from 9 to 15)
+- **drive.py** : For driving the car in autonomous mode in the simulator 
 - **model.h5** : Containing a trained convolution neural network.
 - **writeup_report.md** : Summarizing the results
 

@@ -65,7 +65,7 @@ model.layers.pop()
 # Add a new output layer for regression
 model.add(Dense(1))
 
-model.compile(loss='mse', optimizer='adam')
+model.compile(loss = 'categorical_crossentropy', optimizer='adam')
 
 history_object = model.fit(X_train, y_train, validation_split=0.2, shuffle=True, epochs=2)
 model.save('model_10eps.h5')
